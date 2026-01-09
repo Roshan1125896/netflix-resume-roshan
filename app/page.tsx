@@ -98,7 +98,7 @@ export default function Home() {
                 Roshan Alam
               </h1>
               <p className="text-gray-300 mt-2">
-                HR Operations | Talent Acquisition | L&D | Ex-Amazon
+                HR Operations | Talent Acquisition | L&D | Amazonian
               </p>
               <p className="text-sm text-blue-400 mt-1">
                 linkedin.com/in/roshan-alam-1016j
