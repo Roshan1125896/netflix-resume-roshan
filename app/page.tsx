@@ -15,6 +15,8 @@ type Job = {
   hr: Episode[]
 }
 
+/* ---------------- DATA ---------------- */
+
 const jobs: Job[] = [
   {
     company: "Amazon India",
@@ -66,34 +68,134 @@ const jobs: Job[] = [
   },
 ]
 
-const education: Episode[] = [
-  { title: "BSc. Hotel & Hospitality Management", description: "SBIHM Kolkata – 8.9 CGPA" },
-  { title: "Class XII (CBSE)", description: "83.6%" },
-  { title: "Class X (CBSE)", description: "89.83%" },
-]
-
-const achievements: Episode[] = [
-  { title: "Employee Wellness Program", description: "Designed mental wellness initiatives." },
-  { title: "Vice President – Committee", description: "Led student engagement." },
-  { title: "2nd Place – Whisky Heritage Quiz", description: "Paul John, Goa." },
-  { title: "Runner-up – Cocktail Making", description: "Paul John, Goa." },
-]
+/* ---------------- COMPONENT ---------------- */
 
 export default function Home() {
   const [mode, setMode] = useState<"CX" | "HR">("CX")
+  const [recruiterView, setRecruiterView] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-  const [selected, setSelected] = useState<any>(null)
   const [showIntro, setShowIntro] = useState(true)
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowIntro(false), 2500)
-    return () => clearTimeout(timer)
-  }, [])
+    if (!recruiterView) {
+      const timer = setTimeout(() => setShowIntro(false), 2500)
+      return () => clearTimeout(timer)
+    } else {
+      setShowIntro(false)
+    }
+  }, [recruiterView])
+
+  /* ---------------- RECRUITER VIEW ---------------- */
+  if (recruiterView) {
+    return (
+      <main className="bg-black min-h-screen text-white p-6 md:p-12">
+        <div className="max-w-4xl mx-auto">
+          
+          {/* HEADER */}
+          <div className="flex flex-col md:flex-row items-center justify-between mb-10 gap-6">
+            <div>
+              <h1 className="text-4xl font-extrabold text-red-600">
+                Roshan Alam
+              </h1>
+              <p className="text-gray-300 mt-2">
+                HR Operations | Talent Acquisition | L&D | Ex-Amazon
+              </p>
+              <p className="text-sm text-blue-400 mt-1">
+                linkedin.com/in/roshan-alam-1016j
+              </p>
+            </div>
+
+            <Image
+              src="/roshan.jpg"
+              alt="Roshan Alam"
+              width={140}
+              height={140}
+              className="rounded-full border-2 border-red-600"
+            />
+          </div>
+
+          {/* SUMMARY */}
+          <section className="mb-8">
+            <h2 className="text-2xl font-bold text-red-600 mb-3">
+              Professional Summary
+            </h2>
+            <p className="text-gray-300 leading-relaxed">
+              Customer Experience and People Management professional with 5+ years
+              of experience across Amazon India, TalentFlow, and Taj Bengal.
+              Strong expertise in HR operations, recruitment, training, and
+              performance management.
+            </p>
+          </section>
+
+          {/* SKILLS */}
+          <section className="mb-8">
+            <h2 className="text-2xl font-bold text-red-600 mb-3">
+              Core Skills
+            </h2>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-gray-300">
+              <li>• Talent Acquisition & Hiring</li>
+              <li>• HR Operations & Compliance</li>
+              <li>• Training & L&D</li>
+              <li>• Stakeholder Management</li>
+              <li>• Performance Metrics (CSAT, SLA)</li>
+              <li>• Employee Engagement</li>
+            </ul>
+          </section>
+
+          {/* EXPERIENCE */}
+          <section className="mb-8">
+            <h2 className="text-2xl font-bold text-red-600 mb-3">
+              Experience Highlights
+            </h2>
+            <ul className="list-disc ml-5 text-gray-300 space-y-2">
+              <li>Amazon India – Customer Service & SME (CX, Training, QA)</li>
+              <li>TalentFlow – End-to-End Recruitment (40+ closures)</li>
+              <li>Taj Bengal – HR Operations & Learning & Development</li>
+            </ul>
+          </section>
+
+          {/* EDUCATION */}
+          <section className="mb-8">
+            <h2 className="text-2xl font-bold text-red-600 mb-3">
+              Education
+            </h2>
+            <ul className="list-disc ml-5 text-gray-300">
+              <li>BSc. Hotel & Hospitality Management – SBIHM Kolkata (8.9 CGPA)</li>
+              <li>Class XII – CBSE (83.6%)</li>
+              <li>Class X – CBSE (89.83%)</li>
+            </ul>
+          </section>
+
+          {/* CONTACT */}
+          <section className="mb-10">
+            <h2 className="text-2xl font-bold text-red-600 mb-3">
+              Contact
+            </h2>
+            <p className="text-gray-300">📞 7044467898</p>
+            <p className="text-gray-300">📧 roshan.alam.official@gmail.com</p>
+            <p className="text-gray-300">
+              📍 Khardah, Kolkata – 700117
+            </p>
+          </section>
+
+          {/* BACK BUTTON */}
+          <button
+            onClick={() => setRecruiterView(false)}
+            className="bg-red-600 px-6 py-3 rounded font-semibold"
+          >
+            Back to Interactive View
+          </button>
+        </div>
+      </main>
+    )
+  }
+
+  /* ---------------- INTERACTIVE VIEW ---------------- */
 
   return (
     <main className="bg-black min-h-screen text-white p-4 md:p-10 overflow-x-hidden">
 
-      {/* INTRO */}
+      {/* NETFLIX INTRO */}
       {showIntro && (
         <div className="fixed inset-0 z-[100] bg-black flex items-center justify-center">
           <h1 className="text-red-600 text-5xl md:text-8xl font-extrabold tracking-widest animate-netflixIntro">
@@ -102,16 +204,34 @@ export default function Home() {
         </div>
       )}
 
-      {/* HAMBURGER */}
-      <button
-        onClick={() => setMenuOpen(true)}
-        className="fixed top-4 left-4 text-3xl z-50 p-2"
-      >
-        ☰
-      </button>
+      {/* TOP ACTIONS */}
+      <div className="flex justify-between items-center mb-10">
+        <button
+          onClick={() => setMenuOpen(true)}
+          className="text-3xl p-2"
+        >
+          ☰
+        </button>
+
+        <div className="flex gap-3">
+          <button
+            onClick={() => setMode(mode === "CX" ? "HR" : "CX")}
+            className="bg-red-600 px-4 py-2 rounded"
+          >
+            {mode} View
+          </button>
+
+          <button
+            onClick={() => setRecruiterView(true)}
+            className="border border-red-600 px-4 py-2 rounded"
+          >
+            Recruiter View
+          </button>
+        </div>
+      </div>
 
       {/* HEADER */}
-      <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-12">
+      <div className="flex flex-col md:flex-row items-center justify-between mb-12 gap-6">
         <div className="text-center md:text-right">
           <h1 className="text-3xl md:text-4xl font-extrabold text-red-600">
             Roshan Alam
@@ -134,54 +254,25 @@ export default function Home() {
         />
       </div>
 
-      {/* MODE TOGGLE */}
-      <div className="flex justify-center md:justify-end mb-10">
-        <button
-          onClick={() => setMode(mode === "CX" ? "HR" : "CX")}
-          className="bg-red-600 px-4 py-2 rounded"
-        >
-          Switch to {mode === "CX" ? "HR" : "CX"} Mode
-        </button>
-      </div>
-
       {/* SECTIONS */}
-      {[...jobs, { company: "Education", logo: "", cx: education, hr: education }, { company: "Achievements", logo: "", cx: achievements, hr: achievements }].map(
-        (section, idx) => (
-          <section key={idx} className="mb-14">
-            <div className="flex items-center gap-3 mb-4">
-              {section.logo && <Image src={section.logo} alt="" width={32} height={32} />}
-              <h2 className="text-2xl md:text-3xl font-bold text-red-600">
-                {section.company}
-              </h2>
-            </div>
+      {jobs.map((job, idx) => (
+        <section key={idx} className="mb-14">
+          <h2 className="text-2xl md:text-3xl font-bold text-red-600 mb-4">
+            {job.company}
+          </h2>
 
-            <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4">
-              {(mode === "CX" ? section.cx : section.hr).map((item, i) => (
-                <div
-                  key={i}
-                  onClick={() => setSelected(item)}
-                  className="snap-start min-w-[14rem] md:min-w-[16rem] h-[8rem] bg-zinc-800 rounded-xl flex items-center justify-center text-center font-bold text-sm cursor-pointer transition-all hover:scale-105 hover:shadow-[0_0_25px_rgba(229,9,20,0.9)]"
-                >
-                  {item.title}
-                </div>
-              ))}
-            </div>
-          </section>
-        )
-      )}
-
-      {/* MODAL */}
-      {selected && (
-        <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4">
-          <div className="bg-zinc-900 p-6 rounded-xl max-w-xl w-full">
-            <div className="flex justify-between mb-4">
-              <h2 className="text-xl font-bold text-red-600">{selected.title}</h2>
-              <button onClick={() => setSelected(null)}>✕</button>
-            </div>
-            <p className="text-gray-300">{selected.description}</p>
+          <div className="flex gap-4 overflow-x-auto pb-4">
+            {(mode === "CX" ? job.cx : job.hr).map((item, i) => (
+              <div
+                key={i}
+                className="min-w-[14rem] md:min-w-[16rem] h-[8rem] bg-zinc-800 rounded-xl flex items-center justify-center text-center font-bold cursor-pointer transition-all hover:scale-105 hover:shadow-[0_0_25px_rgba(229,9,20,0.9)]"
+              >
+                {item.title}
+              </div>
+            ))}
           </div>
-        </div>
-      )}
+        </section>
+      ))}
 
       {/* MENU */}
       {menuOpen && (
