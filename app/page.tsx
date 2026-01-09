@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Image from "next/image"
 
 type Episode = {
@@ -170,13 +170,11 @@ const education: Episode[] = [
   },
   {
     title: "Class XII (CBSE)",
-    description:
-      "KV Command Hospital – 83.6%",
+    description: "KV Command Hospital – 83.6%",
   },
   {
     title: "Class X (CBSE)",
-    description:
-      "KV CRPF Durgapur – 89.83%",
+    description: "KV CRPF Durgapur – 89.83%",
   },
 ]
 
@@ -193,28 +191,38 @@ const achievements: Episode[] = [
   },
   {
     title: "2nd Place – Whisky Heritage Quiz",
-    description:
-      "Paul John Quiz, Goa.",
+    description: "Paul John Quiz, Goa.",
   },
   {
     title: "Runner-up – Cocktail Making",
-    description:
-      "Paul John Cocktail Competition.",
+    description: "Paul John Cocktail Competition.",
   },
 ]
 
 export default function Home() {
   const [mode, setMode] = useState<"CX" | "HR">("CX")
-  const [selected, setSelected] = useState<{
-    title: string
-    description: string
-    company: string
-    logo: string
-  } | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [selected, setSelected] = useState<any>(null)
+
+  // 🎬 NETFLIX INTRO
+  const [showIntro, setShowIntro] = useState(true)
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowIntro(false), 2500)
+    return () => clearTimeout(timer)
+  }, [])
 
   return (
     <main className="bg-black min-h-screen text-white p-10 relative overflow-x-hidden">
+
+      {/* NETFLIX INTRO */}
+      {showIntro && (
+        <div className="fixed inset-0 z-[100] bg-black flex items-center justify-center">
+          <h1 className="text-red-600 text-6xl md:text-8xl font-extrabold tracking-widest animate-netflixIntro">
+            ROSHAN&nbsp;ALAM
+          </h1>
+        </div>
+      )}
 
       {/* HAMBURGER */}
       <button
@@ -245,7 +253,7 @@ export default function Home() {
             alt="Roshan Alam"
             width={160}
             height={160}
-            className="rounded-full border-2 border-red-600 object-cover"
+            className="rounded-full border-2 border-red-600"
           />
         </div>
       </div>
@@ -260,37 +268,20 @@ export default function Home() {
         </button>
       </div>
 
-      {/* JOBS */}
+      {/* JOB SECTIONS */}
       {jobs.map((job, idx) => (
         <section key={idx} className="mb-16">
           <div className="flex items-center gap-4 mb-5">
             <Image src={job.logo} alt={job.company} width={40} height={40} />
-            <h2 className="text-3xl font-bold text-red-600">
-              {job.company}
-            </h2>
+            <h2 className="text-3xl font-bold text-red-600">{job.company}</h2>
           </div>
 
           <div className="flex gap-4 overflow-x-auto pb-6">
             {(mode === "CX" ? job.cx : job.hr).map((ep, i) => (
               <div
                 key={i}
-                onClick={() =>
-                  setSelected({
-                    title: ep.title,
-                    description: ep.description,
-                    company: job.company,
-                    logo: job.logo,
-                  })
-                }
-                className="
-                  min-w-[16rem] h-[8rem]
-                  bg-zinc-800 rounded-xl
-                  flex items-center justify-center text-center
-                  font-bold text-sm cursor-pointer
-                  transition-all duration-300
-                  hover:scale-110 hover:-translate-y-2
-                  hover:shadow-[0_0_30px_rgba(229,9,20,0.9)]
-                "
+                onClick={() => setSelected({ ...ep, logo: job.logo })}
+                className="min-w-[16rem] h-[8rem] bg-zinc-800 rounded-xl flex items-center justify-center text-center font-bold cursor-pointer transition-all hover:scale-110 hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(229,9,20,0.9)]"
               >
                 {ep.title}
               </div>
@@ -299,24 +290,15 @@ export default function Home() {
         </section>
       ))}
 
-      {/* EDUCATION */}
       <Section title="Education" items={education} setSelected={setSelected} />
-
-      {/* ACHIEVEMENTS */}
       <Section title="Achievements" items={achievements} setSelected={setSelected} />
 
       {/* MODAL */}
       {selected && (
-        <div className="fixed inset-0 z-50 flex justify-center items-center bg-black/80">
-          <div
-            className="absolute inset-0 bg-center bg-no-repeat bg-contain opacity-20 blur-2xl"
-            style={{ backgroundImage: `url(${selected.logo})` }}
-          />
-          <div className="relative bg-zinc-900 p-8 rounded-xl max-w-3xl w-[85%]">
+        <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center">
+          <div className="bg-zinc-900 p-8 rounded-xl max-w-3xl w-[85%]">
             <div className="flex justify-between mb-4">
-              <h2 className="text-2xl font-bold text-red-600">
-                {selected.title}
-              </h2>
+              <h2 className="text-2xl font-bold text-red-600">{selected.title}</h2>
               <button onClick={() => setSelected(null)}>✕</button>
             </div>
             <p className="text-gray-300">{selected.description}</p>
@@ -324,26 +306,15 @@ export default function Home() {
         </div>
       )}
 
-      {/* HAMBURGER OVERLAY */}
+      {/* MENU */}
       {menuOpen && (
-        <div className="fixed inset-0 bg-black/90 z-50 flex justify-center items-center">
+        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center">
           <div className="bg-zinc-900 p-8 rounded-xl text-center">
-            <Image
-              src="/roshan.jpg"
-              alt="Roshan Alam"
-              width={160}
-              height={160}
-              className="rounded-full mx-auto mb-4 border-2 border-red-600"
-            />
+            <Image src="/roshan.jpg" alt="Roshan" width={160} height={160} className="rounded-full mx-auto mb-4" />
             <p>📞 7044467898</p>
             <p>📧 roshan.alam.official@gmail.com</p>
-            <p className="text-sm mt-2">
-              Karishma Apt 4A, Khardah, Jelia Para, 700117
-            </p>
-            <button
-              onClick={() => setMenuOpen(false)}
-              className="mt-4 text-red-500"
-            >
+            <p className="text-sm mt-2">Khardah, Kolkata – 700117</p>
+            <button onClick={() => setMenuOpen(false)} className="mt-4 text-red-500">
               Close
             </button>
           </div>
@@ -353,39 +324,16 @@ export default function Home() {
   )
 }
 
-function Section({
-  title,
-  items,
-  setSelected,
-}: {
-  title: string
-  items: Episode[]
-  setSelected: any
-}) {
+function Section({ title, items, setSelected }: any) {
   return (
     <section className="mb-16">
       <h2 className="text-3xl font-bold mb-5 text-red-600">{title}</h2>
       <div className="flex gap-4 overflow-x-auto pb-6">
-        {items.map((item, i) => (
+        {items.map((item: Episode, i: number) => (
           <div
             key={i}
-            onClick={() =>
-              setSelected({
-                title: item.title,
-                description: item.description,
-                company: title,
-                logo: "",
-              })
-            }
-            className="
-              min-w-[16rem] h-[8rem]
-              bg-zinc-800 rounded-xl
-              flex items-center justify-center text-center
-              font-bold text-sm cursor-pointer
-              transition-all duration-300
-              hover:scale-110 hover:-translate-y-2
-              hover:shadow-[0_0_30px_rgba(229,9,20,0.9)]
-            "
+            onClick={() => setSelected(item)}
+            className="min-w-[16rem] h-[8rem] bg-zinc-800 rounded-xl flex items-center justify-center text-center font-bold cursor-pointer transition-all hover:scale-110 hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(229,9,20,0.9)]"
           >
             {item.title}
           </div>
