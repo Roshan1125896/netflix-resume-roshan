@@ -68,24 +68,24 @@ const jobs: Job[] = [
       {
         title: "End-to-End Recruitment",
         description:
-          "Managed sourcing, screening, interviewing, offer negotiation, and onboarding across multiple roles.",
+          "Managed sourcing, screening, interviewing, offer negotiation, and onboarding across roles.",
       },
       {
         title: "40+ Hiring Closures",
         description:
-          "Closed 40+ positions within defined timelines across functions.",
+          "Closed 40+ positions across departments within timelines.",
       },
     ],
     hr: [
       {
         title: "Talent Acquisition Strategy",
         description:
-          "Built sourcing pipelines and partnered with hiring managers to align expectations.",
+          "Built sourcing pipelines and partnered with hiring managers.",
       },
       {
         title: "Employer Branding",
         description:
-          "Improved candidate experience through structured communication and feedback.",
+          "Improved candidate experience through structured engagement.",
       },
     ],
   },
@@ -109,15 +109,99 @@ const jobs: Job[] = [
   },
 ]
 
+const education: Episode[] = [
+  {
+    title: "BSc. Hotel & Hospitality Management",
+    description:
+      "SBIHM Kolkata – Graduated with 8.9 CGPA, with focus on people management and operations.",
+  },
+  {
+    title: "Class XII (CBSE)",
+    description:
+      "KV Command Hospital – Scored 83.6%.",
+  },
+  {
+    title: "Class X (CBSE)",
+    description:
+      "KV CRPF Durgapur – Scored 89.83%.",
+  },
+]
+
+const achievements: Episode[] = [
+  {
+    title: "Employee Wellness Program",
+    description:
+      "Designed and implemented a wellness initiative integrating mental health support and flexible work practices.",
+  },
+  {
+    title: "Vice President – Committee (SBIHM)",
+    description:
+      "Improved HR infrastructure, feedback systems, and student engagement initiatives.",
+  },
+  {
+    title: "2nd Place – Whisky Heritage Quiz",
+    description:
+      "Secured second place at Paul John Whisky Heritage Quiz, Goa.",
+  },
+  {
+    title: "Runner-up – Cocktail Making Competition",
+    description:
+      "Runner-up at Paul John Cocktail Making Competition, Goa.",
+  },
+]
+
 export default function Home() {
   const [mode, setMode] = useState<"CX" | "HR">("CX")
-  const [selected, setSelected] = useState<any>(null)
+  const [recruiterView, setRecruiterView] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [selected, setSelected] = useState<Episode | null>(null)
   const [showIntro, setShowIntro] = useState(true)
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowIntro(false), 2500)
-    return () => clearTimeout(timer)
-  }, [])
+    if (!recruiterView) {
+      const timer = setTimeout(() => setShowIntro(false), 2500)
+      return () => clearTimeout(timer)
+    } else {
+      setShowIntro(false)
+    }
+  }, [recruiterView])
+
+  /* ================= RECRUITER VIEW ================= */
+  if (recruiterView) {
+    return (
+      <main className="bg-black min-h-screen text-white p-6 md:p-12">
+        <div className="max-w-4xl mx-auto">
+
+          <h1 className="text-4xl font-extrabold text-red-600 mb-2">
+            Roshan Alam
+          </h1>
+          <p className="text-gray-300 mb-6">
+            Executive Customer & Driver Relations (EXR) | Employee Relations | HRBP-Aligned
+          </p>
+
+          <p className="text-gray-300 mb-6">
+            Employee Relations–focused professional with experience managing escalations,
+            compliance-sensitive cases, and cross-functional stakeholder coordination.
+          </p>
+
+          <ul className="list-disc ml-5 text-gray-300 space-y-2 mb-8">
+            <li>Amazon India – Executive Customer & Driver Relations (EXR)</li>
+            <li>TalentFlow – End-to-End Recruitment</li>
+            <li>Taj Bengal – HR Operations & L&D</li>
+          </ul>
+
+          <button
+            onClick={() => setRecruiterView(false)}
+            className="bg-red-600 px-6 py-3 rounded font-semibold"
+          >
+            Back to Interactive View
+          </button>
+        </div>
+      </main>
+    )
+  }
+
+  /* ================= INTERACTIVE VIEW ================= */
 
   return (
     <main className="bg-black min-h-screen text-white p-4 md:p-10 overflow-x-hidden">
@@ -131,9 +215,34 @@ export default function Home() {
         </div>
       )}
 
+      {/* HAMBURGER */}
+      <button
+        onClick={() => setMenuOpen(true)}
+        className="fixed top-4 left-4 text-3xl z-50"
+      >
+        ☰
+      </button>
+
+      {/* TOP BUTTONS */}
+      <div className="flex justify-end gap-3 mb-10">
+        <button
+          onClick={() => setMode(mode === "CX" ? "HR" : "CX")}
+          className="bg-red-600 px-4 py-2 rounded"
+        >
+          {mode} View
+        </button>
+
+        <button
+          onClick={() => setRecruiterView(true)}
+          className="border border-red-600 px-4 py-2 rounded"
+        >
+          Recruiter View
+        </button>
+      </div>
+
       {/* HEADER */}
       <div className="flex flex-col md:flex-row justify-between items-center mb-14 gap-6">
-        <div className="text-center md:text-left">
+        <div>
           <h1 className="text-3xl md:text-4xl font-extrabold text-red-600">
             Roshan Alam
           </h1>
@@ -155,17 +264,7 @@ export default function Home() {
         />
       </div>
 
-      {/* MODE TOGGLE */}
-      <div className="flex justify-end mb-12">
-        <button
-          onClick={() => setMode(mode === "CX" ? "HR" : "CX")}
-          className="bg-red-600 px-4 py-2 rounded"
-        >
-          Switch to {mode === "CX" ? "HR" : "CX"} View
-        </button>
-      </div>
-
-      {/* JOB SECTIONS */}
+      {/* JOBS */}
       {jobs.map((job, idx) => (
         <section key={idx} className="mb-16">
           <div className="flex items-center gap-4 mb-2">
@@ -186,15 +285,7 @@ export default function Home() {
               <div
                 key={i}
                 onClick={() => setSelected(item)}
-                className="
-                  min-w-[14rem] md:min-w-[16rem] h-[8rem]
-                  bg-zinc-800 rounded-xl
-                  flex items-center justify-center text-center
-                  font-bold text-sm cursor-pointer
-                  transition-all
-                  hover:scale-105
-                  hover:shadow-[0_0_25px_rgba(229,9,20,0.9)]
-                "
+                className="min-w-[14rem] md:min-w-[16rem] h-[8rem] bg-zinc-800 rounded-xl flex items-center justify-center text-center font-bold text-sm cursor-pointer transition-all hover:scale-105 hover:shadow-[0_0_25px_rgba(229,9,20,0.9)]"
               >
                 {item.title}
               </div>
@@ -202,6 +293,12 @@ export default function Home() {
           </div>
         </section>
       ))}
+
+      {/* EDUCATION */}
+      <Section title="Education" items={education} setSelected={setSelected} />
+
+      {/* ACHIEVEMENTS */}
+      <Section title="Achievements" items={achievements} setSelected={setSelected} />
 
       {/* MODAL */}
       {selected && (
@@ -217,6 +314,62 @@ export default function Home() {
           </div>
         </div>
       )}
+
+      {/* HAMBURGER OVERLAY */}
+      {menuOpen && (
+        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center">
+          <div className="bg-zinc-900 p-8 rounded-xl text-center">
+            <Image
+              src="/roshan.jpg"
+              alt="Roshan Alam"
+              width={150}
+              height={150}
+              className="rounded-full mx-auto mb-4 border-2 border-red-600"
+            />
+            <p>📞 7044467898</p>
+            <p>📧 roshan.alam.official@gmail.com</p>
+            <p className="text-sm mt-2">
+              Karishma Apt 4A, Khardah, Jelia Para, 700117
+            </p>
+            <button
+              onClick={() => setMenuOpen(false)}
+              className="mt-4 text-red-500"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </main>
+  )
+}
+
+function Section({
+  title,
+  items,
+  setSelected,
+}: {
+  title: string
+  items: Episode[]
+  setSelected: (item: Episode) => void
+}) {
+  return (
+    <section className="mb-16">
+      <h2 className="text-2xl md:text-3xl font-bold text-red-600 mb-4">
+        {title}
+      </h2>
+
+      <div className="flex gap-4 overflow-x-auto pb-4">
+        {items.map((item, i) => (
+          <div
+            key={i}
+            onClick={() => setSelected(item)}
+            className="min-w-[14rem] md:min-w-[16rem] h-[8rem] bg-zinc-800 rounded-xl flex items-center justify-center text-center font-bold text-sm cursor-pointer transition-all hover:scale-105 hover:shadow-[0_0_25px_rgba(229,9,20,0.9)]"
+          >
+            {item.title}
+          </div>
+        ))}
+      </div>
+    </section>
   )
 }
