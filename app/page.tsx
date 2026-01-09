@@ -166,30 +166,100 @@ export default function Home() {
     }
   }, [recruiterView])
 
-  /* ================= RECRUITER VIEW ================= */
+  /* ---------------- RECRUITER VIEW ---------------- */
   if (recruiterView) {
     return (
       <main className="bg-black min-h-screen text-white p-6 md:p-12">
         <div className="max-w-4xl mx-auto">
+          
+          {/* HEADER */}
+          <div className="flex flex-col md:flex-row items-center justify-between mb-10 gap-6">
+            <div>
+              <h1 className="text-4xl font-extrabold text-red-600">
+                Roshan Alam
+              </h1>
+              <p className="text-gray-300 mt-2">
+                HR Operations | Talent Acquisition | L&D | Ex-Amazon
+              </p>
+              <p className="text-sm text-blue-400 mt-1">
+                linkedin.com/in/roshan-alam-1016j
+              </p>
+            </div>
 
-          <h1 className="text-4xl font-extrabold text-red-600 mb-2">
-            Roshan Alam
-          </h1>
-          <p className="text-gray-300 mb-6">
-            Executive Customer & Driver Relations (EXR) | Employee Relations | HRBP-Aligned
-          </p>
+            <Image
+              src="/roshan.jpg"
+              alt="Roshan Alam"
+              width={140}
+              height={140}
+              className="rounded-full border-2 border-red-600"
+            />
+          </div>
 
-          <p className="text-gray-300 mb-6">
-            Employee Relations–focused professional with experience managing escalations,
-            compliance-sensitive cases, and cross-functional stakeholder coordination.
-          </p>
+          {/* SUMMARY */}
+          <section className="mb-8">
+            <h2 className="text-2xl font-bold text-red-600 mb-3">
+              Professional Summary
+            </h2>
+            <p className="text-gray-300 leading-relaxed">
+              Customer Experience and People Management professional with 5+ years
+              of experience across Amazon India, TalentFlow, and Taj Bengal.
+              Strong expertise in HR operations, recruitment, training, and
+              performance management.
+            </p>
+          </section>
 
-          <ul className="list-disc ml-5 text-gray-300 space-y-2 mb-8">
-            <li>Amazon India – Executive Customer & Driver Relations (EXR)</li>
-            <li>TalentFlow – End-to-End Recruitment</li>
-            <li>Taj Bengal – HR Operations & L&D</li>
-          </ul>
+          {/* SKILLS */}
+          <section className="mb-8">
+            <h2 className="text-2xl font-bold text-red-600 mb-3">
+              Core Skills
+            </h2>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-gray-300">
+              <li>• Talent Acquisition & Hiring</li>
+              <li>• HR Operations & Compliance</li>
+              <li>• Training & L&D</li>
+              <li>• Stakeholder Management</li>
+              <li>• Performance Metrics (CSAT, SLA)</li>
+              <li>• Employee Engagement</li>
+            </ul>
+          </section>
 
+          {/* EXPERIENCE */}
+          <section className="mb-8">
+            <h2 className="text-2xl font-bold text-red-600 mb-3">
+              Experience Highlights
+            </h2>
+            <ul className="list-disc ml-5 text-gray-300 space-y-2">
+              <li>Amazon India – Customer Service & SME (CX, Training, QA)</li>
+              <li>TalentFlow – End-to-End Recruitment (40+ closures)</li>
+              <li>Taj Bengal – HR Operations & Learning & Development</li>
+            </ul>
+          </section>
+
+          {/* EDUCATION */}
+          <section className="mb-8">
+            <h2 className="text-2xl font-bold text-red-600 mb-3">
+              Education
+            </h2>
+            <ul className="list-disc ml-5 text-gray-300">
+              <li>BSc. Hotel & Hospitality Management – SBIHM Kolkata (8.9 CGPA)</li>
+              <li>Class XII – CBSE (83.6%)</li>
+              <li>Class X – CBSE (89.83%)</li>
+            </ul>
+          </section>
+
+          {/* CONTACT */}
+          <section className="mb-10">
+            <h2 className="text-2xl font-bold text-red-600 mb-3">
+              Contact
+            </h2>
+            <p className="text-gray-300">📞 7044467898</p>
+            <p className="text-gray-300">📧 roshan.alam.official@gmail.com</p>
+            <p className="text-gray-300">
+              📍 Khardah, Kolkata – 700117
+            </p>
+          </section>
+
+          {/* BACK BUTTON */}
           <button
             onClick={() => setRecruiterView(false)}
             className="bg-red-600 px-6 py-3 rounded font-semibold"
