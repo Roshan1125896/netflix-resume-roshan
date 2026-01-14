@@ -23,51 +23,41 @@ const jobs: Job[] = [
     promotion: "Promoted to Executive Customer & Driver Relations (EXR) – Oct 2025",
     cx: [
       {
-        title: "Customer Support (Phone, Chat & Email)",
-        description:
-          "Handled high-volume customer interactions across phone, chat, and email while maintaining strong CSAT scores and Amazon service standards.",
-      },
-      {
-        title: "SME – New Hire Training",
-        description:
-          "Trained and mentored new associates on tools, policies, workflows, and quality benchmarks.",
-      },
-      {
-        title: "DCE – Communication Training",
-        description:
-          "Delivered communication skill training sessions focused on call control, empathy, and clarity.",
-      },
-      {
-        title: "Quality Audits",
-        description:
-          "Audited customer interactions and provided actionable feedback to improve call quality and compliance.",
-      },
-      {
         title: "Executive Escalation Handling",
         description:
           "Handled 15–20 high-priority customer and driver escalations daily, resolving ~95% within same business day against a 24-hour SLA.",
       },
+      {
+        title: "First Contact Resolution (85%)",
+        description:
+          "Achieved ~85% FCR through effective probing, policy interpretation, and stakeholder coordination.",
+      },
+      {
+        title: "Repeat Escalation Reduction",
+        description:
+          "Reduced repeat escalations by ~20% through root-cause analysis and corrective action.",
+      },
+      {
+        title: "Compliance & Policy Exceptions",
+        description:
+          "Managed compliance-sensitive and legal-impact cases including refund exceptions and goodwill adjustments.",
+      },
     ],
     hr: [
       {
-        title: "People Development",
+        title: "Employee & Stakeholder Relations",
         description:
-          "Coached associates through structured feedback, mentoring, and development plans.",
-      },
-      {
-        title: "Training & Onboarding",
-        description:
-          "Supported onboarding and continuous training initiatives for new hires.",
-      },
-      {
-        title: "Performance Management",
-        description:
-          "Tracked KPIs such as CSAT, SLA, and quality metrics to improve outcomes.",
+          "Coordinated with Legal, Compliance, Operations, and Support teams to ensure risk-aware, fair resolutions.",
       },
       {
         title: "Audit & Quality Excellence",
         description:
           "Maintained 100% audit pass rate for 9 consecutive weeks post-promotion; recognized for Best ACHT & PRR.",
+      },
+      {
+        title: "Escalation Frameworks",
+        description:
+          "Designed escalation templates and frameworks using internal CRM and Outlook to improve TAT and consistency.",
       },
     ],
   },
@@ -78,44 +68,24 @@ const jobs: Job[] = [
       {
         title: "End-to-End Recruitment",
         description:
-          "Managed sourcing, screening, interviewing, offer negotiation, and onboarding.",
+          "Managed sourcing, screening, interviewing, offer negotiation, and onboarding across roles.",
       },
       {
         title: "40+ Hiring Closures",
         description:
-          "Closed more than 40 roles across tech and non-tech domains.",
-      },
-      {
-        title: "Candidate Screening",
-        description:
-          "Conducted structured interviews ensuring role and culture fit.",
-      },
-      {
-        title: "ATS & Dashboards",
-        description:
-          "Maintained ATS and recruitment reporting dashboards.",
+          "Closed 40+ positions across departments within timelines.",
       },
     ],
     hr: [
       {
         title: "Talent Acquisition Strategy",
         description:
-          "Built efficient sourcing strategies and pipelines.",
+          "Built sourcing pipelines and partnered with hiring managers.",
       },
       {
         title: "Employer Branding",
         description:
-          "Strengthened employer brand through candidate engagement.",
-      },
-      {
-        title: "Stakeholder Management",
-        description:
-          "Worked closely with hiring managers to align expectations.",
-      },
-      {
-        title: "Hiring Analytics",
-        description:
-          "Used data-driven insights to optimize recruitment.",
+          "Improved candidate experience through structured engagement.",
       },
     ],
   },
@@ -126,39 +96,14 @@ const jobs: Job[] = [
       {
         title: "HR Operations Support",
         description:
-          "Handled employee queries, HR documentation, and compliance.",
-      },
-      {
-        title: "Exit Interviews",
-        description:
-          "Conducted exit interviews and documented insights.",
-      },
-      {
-        title: "Learning & Development",
-        description:
-          "Designed and supported onboarding programs.",
-      },
-      {
-        title: "Training Records",
-        description:
-          "Maintained trainee performance records and audits.",
+          "Handled employee queries, HR documentation, and policy guidance.",
       },
     ],
     hr: [
       {
-        title: "HR Compliance",
+        title: "Learning & Development",
         description:
-          "Managed policies, records, and audits.",
-      },
-      {
-        title: "Employee Engagement",
-        description:
-          "Supported engagement initiatives.",
-      },
-      {
-        title: "Training Documentation",
-        description:
-          "Prepared onboarding and training manuals.",
+          "Supported onboarding, training execution, and documentation.",
       },
     ],
   },
@@ -172,11 +117,13 @@ const education: Episode[] = [
   },
   {
     title: "Class XII (CBSE)",
-    description: "KV Command Hospital – Scored 83.6%.",
+    description:
+      "KV Command Hospital – Scored 83.6%.",
   },
   {
     title: "Class X (CBSE)",
-    description: "KV CRPF Durgapur – Scored 89.83%.",
+    description:
+      "KV CRPF Durgapur – Scored 89.83%.",
   },
 ]
 
@@ -211,42 +158,88 @@ export default function Home() {
   const [showIntro, setShowIntro] = useState(true)
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowIntro(false), 2500)
-    return () => clearTimeout(timer)
-  }, [])
+    if (!recruiterView) {
+      const timer = setTimeout(() => setShowIntro(false), 2500)
+      return () => clearTimeout(timer)
+    } else {
+      setShowIntro(false)
+    }
+  }, [recruiterView])
 
+  /* ---------------- RECRUITER VIEW ---------------- */
   if (recruiterView) {
     return (
       <main className="bg-black min-h-screen text-white p-6 md:p-12">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl font-extrabold text-red-600 mb-2">
-            Roshan Alam
-          </h1>
-          <p className="text-gray-300 mb-4">
-            Executive Customer & Driver Relations (EXR) | Employee Relations | HRBP-Aligned
-          </p>
+          
+          {/* HEADER */}
+          <div className="flex flex-col md:flex-row items-center justify-between mb-10 gap-6">
+            <div>
+              <h1 className="text-4xl font-extrabold text-red-600">
+                Roshan Alam
+              </h1>
+              <p className="text-gray-300 mt-2">
+                HR Operations | Talent Acquisition | L&D | Ex-Amazon
+              </p>
+              <p className="text-sm text-blue-400 mt-1">
+                linkedin.com/in/roshan-alam-1016j
+              </p>
+            </div>
 
-          <section className="mb-6">
-            <h2 className="text-xl font-bold text-red-600 mb-2">Professional Summary</h2>
-            <p className="text-gray-300">
-              Employee Relations–focused professional with experience managing escalations,
-              compliance-sensitive cases, and cross-functional stakeholder coordination.
-              Proven ability to resolve high-risk cases within SLA, reduce repeat escalations,
-              and partner with Legal, Compliance, Operations, and CX teams.
+            <Image
+              src="/roshan.jpg"
+              alt="Roshan Alam"
+              width={140}
+              height={140}
+              className="rounded-full border-2 border-red-600"
+            />
+          </div>
+
+          {/* SUMMARY */}
+          <section className="mb-8">
+            <h2 className="text-2xl font-bold text-red-600 mb-3">
+              Professional Summary
+            </h2>
+            <p className="text-gray-300 leading-relaxed">
+              Customer Experience and People Management professional with 5+ years
+              of experience across Amazon India, TalentFlow, and Taj Bengal.
+              Strong expertise in HR operations, recruitment, training, and
+              performance management.
             </p>
           </section>
 
-          <section className="mb-6">
-            <h2 className="text-xl font-bold text-red-600 mb-2">Experience</h2>
-            <ul className="list-disc ml-5 text-gray-300 space-y-2">
-              <li><strong>Amazon India – Executive Customer & Driver Relations (EXR)</strong><br/>Handled 15–20 executive escalations daily, 85% FCR, reduced repeat escalations by 20%, 100% audit pass for 9 weeks.</li>
-              <li><strong>TalentFlow – Recruitment Specialist</strong><br/>Closed 40+ roles, managed end-to-end hiring and ATS reporting.</li>
-              <li><strong>Taj Bengal – HR Operations & L&D</strong><br/>Supported onboarding, training, HR documentation, and compliance.</li>
+          {/* SKILLS */}
+          <section className="mb-8">
+            <h2 className="text-2xl font-bold text-red-600 mb-3">
+              Core Skills
+            </h2>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-gray-300">
+              <li>• Talent Acquisition & Hiring</li>
+              <li>• HR Operations & Compliance</li>
+              <li>• Training & L&D</li>
+              <li>• Stakeholder Management</li>
+              <li>• Performance Metrics (CSAT, SLA)</li>
+              <li>• Employee Engagement</li>
             </ul>
           </section>
 
-          <section className="mb-6">
-            <h2 className="text-xl font-bold text-red-600 mb-2">Education</h2>
+          {/* EXPERIENCE */}
+          <section className="mb-8">
+            <h2 className="text-2xl font-bold text-red-600 mb-3">
+              Experience Highlights
+            </h2>
+            <ul className="list-disc ml-5 text-gray-300 space-y-2">
+              <li>Amazon India – Customer Service & SME (CX, Training, QA)</li>
+              <li>TalentFlow – End-to-End Recruitment (40+ closures)</li>
+              <li>Taj Bengal – HR Operations & Learning & Development</li>
+            </ul>
+          </section>
+
+          {/* EDUCATION */}
+          <section className="mb-8">
+            <h2 className="text-2xl font-bold text-red-600 mb-3">
+              Education
+            </h2>
             <ul className="list-disc ml-5 text-gray-300">
               <li>BSc. Hotel & Hospitality Management – SBIHM Kolkata (8.9 CGPA)</li>
               <li>Class XII – CBSE (83.6%)</li>
@@ -254,16 +247,19 @@ export default function Home() {
             </ul>
           </section>
 
-          <section className="mb-6">
-            <h2 className="text-xl font-bold text-red-600 mb-2">Achievements</h2>
-            <ul className="list-disc ml-5 text-gray-300">
-              <li>Designed Employee Wellness Program</li>
-              <li>Vice President – SBIHM Committee</li>
-              <li>2nd Place – Whisky Heritage Quiz</li>
-              <li>Runner-up – Cocktail Competition</li>
-            </ul>
+          {/* CONTACT */}
+          <section className="mb-10">
+            <h2 className="text-2xl font-bold text-red-600 mb-3">
+              Contact
+            </h2>
+            <p className="text-gray-300">📞 7044467898</p>
+            <p className="text-gray-300">📧 roshan.alam.official@gmail.com</p>
+            <p className="text-gray-300">
+              📍 Khardah, Kolkata – 700117
+            </p>
           </section>
 
+          {/* BACK BUTTON */}
           <button
             onClick={() => setRecruiterView(false)}
             className="bg-red-600 px-6 py-3 rounded font-semibold"
@@ -275,32 +271,175 @@ export default function Home() {
     )
   }
 
+  /* ================= INTERACTIVE VIEW ================= */
+
   return (
     <main className="bg-black min-h-screen text-white p-4 md:p-10 overflow-x-hidden">
-      <style jsx global>{`
-        @keyframes netflixIntro {
-          0% { opacity: 0; transform: scale(0.8); }
-          40% { opacity: 1; transform: scale(1); }
-          70% { opacity: 1; }
-          100% { opacity: 0; }
-        }
-        .netflix-intro {
-          animation: netflixIntro 2.5s ease-in-out forwards;
-        }
-      `}</style>
 
+      {/* NETFLIX INTRO */}
       {showIntro && (
         <div className="fixed inset-0 z-[100] bg-black flex items-center justify-center">
-          <h1 className="netflix-intro text-red-600 text-5xl md:text-8xl font-extrabold tracking-widest">
+          <h1 className="text-red-600 text-5xl md:text-8xl font-extrabold tracking-widest animate-netflixIntro">
             ROSHAN&nbsp;ALAM
           </h1>
         </div>
       )}
 
-      {/* Hamburger, buttons, header, jobs, education, achievements, modal, overlay */}
-      {/* This part is identical to what you already had and now fully intact */}
+      {/* HAMBURGER */}
+      <button
+        onClick={() => setMenuOpen(true)}
+        className="fixed top-4 left-4 text-3xl z-50"
+      >
+        ☰
+      </button>
 
-      {/* …the interactive view continues exactly as in your current working version… */}
+      {/* TOP BUTTONS */}
+      <div className="flex justify-end gap-3 mb-10">
+        <button
+          onClick={() => setMode(mode === "CX" ? "HR" : "CX")}
+          className="bg-red-600 px-4 py-2 rounded"
+        >
+          {mode} View
+        </button>
+
+        <button
+          onClick={() => setRecruiterView(true)}
+          className="border border-red-600 px-4 py-2 rounded"
+        >
+          Recruiter View
+        </button>
+      </div>
+
+      {/* HEADER */}
+      <div className="flex flex-col md:flex-row justify-between items-center mb-14 gap-6">
+        <div>
+          <h1 className="text-3xl md:text-4xl font-extrabold text-red-600">
+            Roshan Alam
+          </h1>
+          <a
+            href="https://www.linkedin.com/in/roshan-alam-1016j/"
+            target="_blank"
+            className="text-blue-400 text-sm"
+          >
+            linkedin.com/in/roshan-alam-1016j
+          </a>
+        </div>
+
+        <Image
+          src="/roshan.jpg"
+          alt="Roshan Alam"
+          width={120}
+          height={120}
+          className="rounded-full border-2 border-red-600"
+        />
+      </div>
+
+      {/* JOBS */}
+      {jobs.map((job, idx) => (
+        <section key={idx} className="mb-16">
+          <div className="flex items-center gap-4 mb-2">
+            <Image src={job.logo} alt={job.company} width={36} height={36} />
+            <h2 className="text-2xl md:text-3xl font-bold text-red-600">
+              {job.company}
+            </h2>
+          </div>
+
+          {job.promotion && (
+            <p className="text-sm text-gray-400 mb-4">
+              {job.promotion}
+            </p>
+          )}
+
+          <div className="flex gap-4 overflow-x-auto pb-4">
+            {(mode === "CX" ? job.cx : job.hr).map((item, i) => (
+              <div
+                key={i}
+                onClick={() => setSelected(item)}
+                className="min-w-[14rem] md:min-w-[16rem] h-[8rem] bg-zinc-800 rounded-xl flex items-center justify-center text-center font-bold text-sm cursor-pointer transition-all hover:scale-105 hover:shadow-[0_0_25px_rgba(229,9,20,0.9)]"
+              >
+                {item.title}
+              </div>
+            ))}
+          </div>
+        </section>
+      ))}
+
+      {/* EDUCATION */}
+      <Section title="Education" items={education} setSelected={setSelected} />
+
+      {/* ACHIEVEMENTS */}
+      <Section title="Achievements" items={achievements} setSelected={setSelected} />
+
+      {/* MODAL */}
+      {selected && (
+        <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4">
+          <div className="bg-zinc-900 p-6 rounded-xl max-w-xl w-full">
+            <div className="flex justify-between mb-4">
+              <h2 className="text-xl font-bold text-red-600">
+                {selected.title}
+              </h2>
+              <button onClick={() => setSelected(null)}>✕</button>
+            </div>
+            <p className="text-gray-300">{selected.description}</p>
+          </div>
+        </div>
+      )}
+
+      {/* HAMBURGER OVERLAY */}
+      {menuOpen && (
+        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center">
+          <div className="bg-zinc-900 p-8 rounded-xl text-center">
+            <Image
+              src="/roshan.jpg"
+              alt="Roshan Alam"
+              width={150}
+              height={150}
+              className="rounded-full mx-auto mb-4 border-2 border-red-600"
+            />
+            <p>📞 7044467898</p>
+            <p>📧 roshan.alam.official@gmail.com</p>
+            <p className="text-sm mt-2">
+              Karishma Apt 4A, Khardah, Jelia Para, 700117
+            </p>
+            <button
+              onClick={() => setMenuOpen(false)}
+              className="mt-4 text-red-500"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </main>
+  )
+}
+
+function Section({
+  title,
+  items,
+  setSelected,
+}: {
+  title: string
+  items: Episode[]
+  setSelected: (item: Episode) => void
+}) {
+  return (
+    <section className="mb-16">
+      <h2 className="text-2xl md:text-3xl font-bold text-red-600 mb-4">
+        {title}
+      </h2>
+
+      <div className="flex gap-4 overflow-x-auto pb-4">
+        {items.map((item, i) => (
+          <div
+            key={i}
+            onClick={() => setSelected(item)}
+            className="min-w-[14rem] md:min-w-[16rem] h-[8rem] bg-zinc-800 rounded-xl flex items-center justify-center text-center font-bold text-sm cursor-pointer transition-all hover:scale-105 hover:shadow-[0_0_25px_rgba(229,9,20,0.9)]"
+          >
+            {item.title}
+          </div>
+        ))}
+      </div>
+    </section>
   )
 }
