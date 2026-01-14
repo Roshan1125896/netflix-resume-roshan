@@ -42,6 +42,11 @@ const jobs: Job[] = [
         description:
           "Managed compliance-sensitive and legal-impact cases including refund exceptions and goodwill adjustments.",
       },
+      {
+        title: "Policy & Workflow Improvements",
+        description:
+          "Identified policy gaps and partnered with leadership to improve SOPs and operational workflows.",
+      },
     ],
     hr: [
       {
@@ -59,6 +64,11 @@ const jobs: Job[] = [
         description:
           "Designed escalation templates and frameworks using internal CRM and Outlook to improve TAT and consistency.",
       },
+      {
+        title: "People Development",
+        description:
+          "Mentored associates through structured feedback, coaching, and performance improvement plans.",
+      },
     ],
   },
   {
@@ -75,6 +85,16 @@ const jobs: Job[] = [
         description:
           "Closed 40+ positions across departments within timelines.",
       },
+      {
+        title: "Candidate Screening",
+        description:
+          "Conducted structured interviews ensuring strong role and culture fit.",
+      },
+      {
+        title: "ATS & Dashboards",
+        description:
+          "Maintained ATS, hiring metrics, and recruitment reporting dashboards.",
+      },
     ],
     hr: [
       {
@@ -87,6 +107,16 @@ const jobs: Job[] = [
         description:
           "Improved candidate experience through structured engagement.",
       },
+      {
+        title: "Stakeholder Management",
+        description:
+          "Aligned hiring goals with business leaders and delivery teams.",
+      },
+      {
+        title: "Hiring Analytics",
+        description:
+          "Used data-driven insights to optimize recruitment cycles and quality.",
+      },
     ],
   },
   {
@@ -98,12 +128,37 @@ const jobs: Job[] = [
         description:
           "Handled employee queries, HR documentation, and policy guidance.",
       },
-    ],
-    hr: [
+      {
+        title: "Exit Interviews",
+        description:
+          "Conducted exit interviews and documented insights.",
+      },
       {
         title: "Learning & Development",
         description:
-          "Supported onboarding, training execution, and documentation.",
+          "Designed and supported onboarding programs.",
+      },
+      {
+        title: "Training Records",
+        description:
+          "Maintained trainee performance records and audits.",
+      },
+    ],
+    hr: [
+      {
+        title: "HR Compliance",
+        description:
+          "Managed policies, records, and audits.",
+      },
+      {
+        title: "Employee Engagement",
+        description:
+          "Supported engagement initiatives.",
+      },
+      {
+        title: "Training Documentation",
+        description:
+          "Prepared onboarding and training manuals.",
       },
     ],
   },
@@ -171,95 +226,22 @@ export default function Home() {
     return (
       <main className="bg-black min-h-screen text-white p-6 md:p-12">
         <div className="max-w-4xl mx-auto">
-          
-          {/* HEADER */}
-          <div className="flex flex-col md:flex-row items-center justify-between mb-10 gap-6">
-            <div>
-              <h1 className="text-4xl font-extrabold text-red-600">
-                Roshan Alam
-              </h1>
-              <p className="text-gray-300 mt-2">
-                HR Operations | Talent Acquisition | L&D | Ex-Amazon
-              </p>
-              <p className="text-sm text-blue-400 mt-1">
-                linkedin.com/in/roshan-alam-1016j
-              </p>
-            </div>
+          <h1 className="text-4xl font-extrabold text-red-600 mb-2">Roshan Alam</h1>
+          <p className="text-gray-300 mb-6">
+            Executive Customer & Driver Relations (EXR) | Employee Relations | HRBP-Aligned
+          </p>
 
-            <Image
-              src="/roshan.jpg"
-              alt="Roshan Alam"
-              width={140}
-              height={140}
-              className="rounded-full border-2 border-red-600"
-            />
-          </div>
+          <p className="text-gray-300 mb-6">
+            Employee Relations–focused professional with experience managing escalations,
+            compliance-sensitive cases, and cross-functional stakeholder coordination.
+          </p>
 
-          {/* SUMMARY */}
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold text-red-600 mb-3">
-              Professional Summary
-            </h2>
-            <p className="text-gray-300 leading-relaxed">
-              Customer Experience and People Management professional with 5+ years
-              of experience across Amazon India, TalentFlow, and Taj Bengal.
-              Strong expertise in HR operations, recruitment, training, and
-              performance management.
-            </p>
-          </section>
+          <ul className="list-disc ml-5 text-gray-300 space-y-2 mb-8">
+            <li>Amazon India – Executive Customer & Driver Relations (EXR)</li>
+            <li>TalentFlow – End-to-End Recruitment</li>
+            <li>Taj Bengal – HR Operations & L&D</li>
+          </ul>
 
-          {/* SKILLS */}
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold text-red-600 mb-3">
-              Core Skills
-            </h2>
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-gray-300">
-              <li>• Talent Acquisition & Hiring</li>
-              <li>• HR Operations & Compliance</li>
-              <li>• Training & L&D</li>
-              <li>• Stakeholder Management</li>
-              <li>• Performance Metrics (CSAT, SLA)</li>
-              <li>• Employee Engagement</li>
-            </ul>
-          </section>
-
-          {/* EXPERIENCE */}
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold text-red-600 mb-3">
-              Experience Highlights
-            </h2>
-            <ul className="list-disc ml-5 text-gray-300 space-y-2">
-              <li>Amazon India – Customer Service & SME (CX, Training, QA)</li>
-              <li>TalentFlow – End-to-End Recruitment (40+ closures)</li>
-              <li>Taj Bengal – HR Operations & Learning & Development</li>
-            </ul>
-          </section>
-
-          {/* EDUCATION */}
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold text-red-600 mb-3">
-              Education
-            </h2>
-            <ul className="list-disc ml-5 text-gray-300">
-              <li>BSc. Hotel & Hospitality Management – SBIHM Kolkata (8.9 CGPA)</li>
-              <li>Class XII – CBSE (83.6%)</li>
-              <li>Class X – CBSE (89.83%)</li>
-            </ul>
-          </section>
-
-          {/* CONTACT */}
-          <section className="mb-10">
-            <h2 className="text-2xl font-bold text-red-600 mb-3">
-              Contact
-            </h2>
-            <p className="text-gray-300">📞 7044467898</p>
-            <p className="text-gray-300">📧 roshan.alam.official@gmail.com</p>
-            <p className="text-gray-300">
-              📍 Khardah, Kolkata – 700117
-            </p>
-          </section>
-
-          {/* BACK BUTTON */}
           <button
             onClick={() => setRecruiterView(false)}
             className="bg-red-600 px-6 py-3 rounded font-semibold"
@@ -271,12 +253,8 @@ export default function Home() {
     )
   }
 
-  /* ================= INTERACTIVE VIEW ================= */
-
   return (
     <main className="bg-black min-h-screen text-white p-4 md:p-10 overflow-x-hidden">
-
-      {/* NETFLIX INTRO */}
       {showIntro && (
         <div className="fixed inset-0 z-[100] bg-black flex items-center justify-center">
           <h1 className="text-red-600 text-5xl md:text-8xl font-extrabold tracking-widest animate-netflixIntro">
@@ -285,7 +263,6 @@ export default function Home() {
         </div>
       )}
 
-      {/* HAMBURGER */}
       <button
         onClick={() => setMenuOpen(true)}
         className="fixed top-4 left-4 text-3xl z-50"
@@ -293,7 +270,6 @@ export default function Home() {
         ☰
       </button>
 
-      {/* TOP BUTTONS */}
       <div className="flex justify-end gap-3 mb-10">
         <button
           onClick={() => setMode(mode === "CX" ? "HR" : "CX")}
@@ -310,7 +286,6 @@ export default function Home() {
         </button>
       </div>
 
-      {/* HEADER */}
       <div className="flex flex-col md:flex-row justify-between items-center mb-14 gap-6">
         <div>
           <h1 className="text-3xl md:text-4xl font-extrabold text-red-600">
@@ -334,7 +309,6 @@ export default function Home() {
         />
       </div>
 
-      {/* JOBS */}
       {jobs.map((job, idx) => (
         <section key={idx} className="mb-16">
           <div className="flex items-center gap-4 mb-2">
@@ -364,13 +338,9 @@ export default function Home() {
         </section>
       ))}
 
-      {/* EDUCATION */}
       <Section title="Education" items={education} setSelected={setSelected} />
-
-      {/* ACHIEVEMENTS */}
       <Section title="Achievements" items={achievements} setSelected={setSelected} />
 
-      {/* MODAL */}
       {selected && (
         <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4">
           <div className="bg-zinc-900 p-6 rounded-xl max-w-xl w-full">
@@ -385,7 +355,6 @@ export default function Home() {
         </div>
       )}
 
-      {/* HAMBURGER OVERLAY */}
       {menuOpen && (
         <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center">
           <div className="bg-zinc-900 p-8 rounded-xl text-center">
